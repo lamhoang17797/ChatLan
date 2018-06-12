@@ -15,7 +15,7 @@ namespace ChatLAN
     public partial class Main : Form
     {
         Client client;
-        public delegate void MainThreadOperation(string sender, ClientEventArts e);
+        public delegate void MainThreadOperation(string sender, ClientEventArgs e);
         public Main(Client client)
         {
             InitializeComponent();
@@ -26,7 +26,7 @@ namespace ChatLAN
             client.Disconnected += Client_Disconnected;
         }
 
-        private void Client_Disconnected(object sender, ClientEventArts e)
+        private void Client_Disconnected(object sender, ClientEventArgs e)
         {
             MainThreadOperation temp = MainThreadListViewLog;
             this.Invoke(temp, "Disconnected", e);
@@ -35,7 +35,7 @@ namespace ChatLAN
         Dictionary<string, string> clientlist = new Dictionary<string, string>();
         Dictionary<string, PrivateChat> privatechatlist = new Dictionary<string, PrivateChat>();
 
-        private void Client_MessageReceived(object sender, ClientEventArts e)
+        private void Client_MessageReceived(object sender, ClientEventArgs e)
         {
             MainThreadOperation temp;
 
@@ -68,14 +68,14 @@ namespace ChatLAN
             }
         }
 
-        private void mainthreadshowprivatechat(string receiverclientID, ClientEventArts e)
+        private void mainthreadshowprivatechat(string receiverclientID, ClientEventArgs e)
         {
             string receivernickname = clientlist[receiverclientID];
             privatechatlist.Add(receiverclientID, new PrivateChat(client, receiverclientID, receivernickname));
             privatechatlist[receiverclientID].Show();
         }
 
-        public void MainThreadListBox_ListUser(string sender,ClientEventArts e)
+        public void MainThreadListBox_ListUser(string sender,ClientEventArgs e)
         {
             listBox_ListUser.Items.Clear();
             //add vào list user
@@ -85,7 +85,7 @@ namespace ChatLAN
             }
         }
 
-        public void MainThreadListViewLog(string sender, ClientEventArts e)
+        public void MainThreadListViewLog(string sender, ClientEventArgs e)
         {
             ListViewItem listview = new ListViewItem();
             int stt = listView_log.Items.Count;

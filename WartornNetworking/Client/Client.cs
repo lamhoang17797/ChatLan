@@ -27,8 +27,8 @@ namespace WartornNetworking.Client
 
         public SimpleTcpClient client { get; private set; }
 
-        public event EventHandler<ClientEventArts> MessageReceived;
-        public event EventHandler<ClientEventArts> Disconnected;
+        public event EventHandler<ClientEventArgs> MessageReceived;
+        public event EventHandler<ClientEventArgs> Disconnected;
 
         public Client(IPAddress ipaddress,int Port)
         {
@@ -236,19 +236,19 @@ namespace WartornNetworking.Client
 
         private void OnMessageReceived(Package package)
         {
-            MessageReceived?.Invoke(this, new ClientEventArts(package));
+            MessageReceived?.Invoke(this, new ClientEventArgs(package));
         }
 
         private void OnDisconnected(object sender, EventArgs e)
         {
-            Disconnected?.Invoke(this, new ClientEventArts(null));
+            Disconnected?.Invoke(this, new ClientEventArgs(null));
         }
     }
 
-    public class ClientEventArts: EventArgs
+    public class ClientEventArgs: EventArgs
     {
         public Package package { get; private set; }
-        public ClientEventArts(Package package)
+        public ClientEventArgs(Package package)
         {
             this.package = package;
         }

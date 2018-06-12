@@ -79,9 +79,9 @@
             // 
             // button_SendFile
             // 
-            this.button_SendFile.Location = new System.Drawing.Point(514, 316);
+            this.button_SendFile.Location = new System.Drawing.Point(476, 316);
             this.button_SendFile.Name = "button_SendFile";
-            this.button_SendFile.Size = new System.Drawing.Size(75, 23);
+            this.button_SendFile.Size = new System.Drawing.Size(113, 23);
             this.button_SendFile.TabIndex = 3;
             this.button_SendFile.Text = "Send File";
             this.button_SendFile.UseVisualStyleBackColor = true;
