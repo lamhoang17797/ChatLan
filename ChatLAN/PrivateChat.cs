@@ -61,6 +61,14 @@ namespace ChatLAN
             if (jhj.ShowDialog() == DialogResult.OK)
             {
                 string filepath = jhj.FileName;
+                FileInfo fi = new FileInfo(filepath);
+
+                if (fi.Length >= 10000)
+                {
+                    MessageBox.Show("Quá giới hạn gửi nhận file!");
+                    return;
+                }
+
                 var fileContent = File.ReadAllBytes(filepath);
                 client.SendMessage(clientID, "f|" + Encoding.UTF8.GetString(fileContent));
             }
@@ -112,11 +120,11 @@ namespace ChatLAN
         {
             var datas = e.package.data.Split('|');
 
-            //if (datas[0] == clientID)
-            //{
-            //    return; 
-            //}
-        
+            if (datas[0] == clientID)
+            {
+                return;
+            }
+
 
             var data = datas[3];
 
